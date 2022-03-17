@@ -36,19 +36,38 @@ mongoose
     return Recipe.insertMany(data)
   })
 
-  .then((data) => { console.log(data.title) })
+  .then((data) => { console.log(data.title) 
+    return Recipe.updateOne({title: "Rigatoni alla Genovese"}, { duration: 100 })
+   })
+   
+  .then((data) => {
+    console.log('value changed')
+    return Recipe.deleteOne({title: "Carrot Cake"})
+  })
 
-  // .catch((error) => console.log(error))
-    // Run your code here, after you have insured that the connection was made
+  .then((data) => {
+    console.log('deleted')
+  })
+
+  .then(() => {mongoose.connection.close()})
+
+  .then(() => {
+    console.log('connection closed')
+  })
+  // .catch((error) => {
+  //   console.log('error')
+  // })
+  // .catch((error) => {console.log("not changed")}) 
+  // // .catch((error) => console.log(error))
+  //   // Run your code here, after you have insured that the connection was made
   
   .catch(error => {
     console.error('Error connecting to the database', error);
   });
   
-  Recipe.findByIdAndUpdate("62335071e4f2a738bc1067ec", { duration: 100 })
-  .then("value changed")
-  .catch("not changed");
+ 
 
-  Recipe.findByIdAndRemove("623350ddc28564978e11ab34")
-  .then('deleted')
-  .catch('error');
+  
+
+
+
